@@ -1,6 +1,7 @@
 package com.prj.agile.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prj.agile.entity.Client;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PhoneDTO {
 
+    @JsonIgnore
     private Integer id;
     private String area;
     private String ddd;

@@ -2,10 +2,12 @@ package com.prj.agile.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "Phone")
 @Table(name = "phone",
         schema= "onboarding",

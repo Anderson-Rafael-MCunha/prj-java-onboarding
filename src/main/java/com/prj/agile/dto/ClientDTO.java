@@ -1,6 +1,7 @@
 package com.prj.agile.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientDTO {
 
+    @JsonIgnore
     private Integer id;
     private String document;
     private String name;
