@@ -51,12 +51,14 @@ public class Address {
     @OneToMany(mappedBy = "clientAddress")
     private List<Client> clients = new ArrayList<>();
 
-    public Address(String zipCode, String complement, Integer number, String street, String neighborhood, String country) {
+    public Address(String zipCode, String complement, Integer number, String street, String neighborhood, String city, String state, String country) {
         this.zipCode = zipCode;
         this.complement = complement;
         this.number = number;
         this.street = street;
         this.neighborhood = neighborhood;
+        this.city = city;
+        this.state = state;
         this.country = country;
     }
 }

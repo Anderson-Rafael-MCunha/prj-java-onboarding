@@ -43,5 +43,12 @@ public class Phone {
     @JoinColumn(name = "phone_client_id")
     private Client client;
 
-
+    public Phone(Client client, String phoneStatus, String phoneType, String number, String ddd, String area) {
+        this.client = client;
+        this.phoneStatus = phoneStatus;
+        this.phoneType = phoneType;
+        this.number = number;
+        this.ddd = ddd;
+        this.area = area;
+    }
 }
