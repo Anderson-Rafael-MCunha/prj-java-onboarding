@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -53,8 +55,15 @@ public class Client {
     @JoinColumn(name = "client_type_id")
     private ClientType clientType;
 
+    @ManyToOne
+    @JoinColumn(name = "client_address_id")
+    private Address clientAddress;
 
-    public Client(String document, String name, Date birthDate, Date createdAt, Boolean pep, String email, String status) {
+    @OneToMany(mappedBy = "client")
+    private List<Phone> phones = new ArrayList<>();
+
+
+    public Client(String document, String name, Date birthDate, Date createdAt, Boolean pep, String email, String status, ClientType clientType, Address clientAddress) {
         this.document = document;
         this.name = name;
         this.birthDate = birthDate;
@@ -62,5 +71,7 @@ public class Client {
         this.pep = pep;
         this.email = email;
         this.status = status;
+        this.clientType = clientType;
+        this.clientAddress = clientAddress;
     }
 }

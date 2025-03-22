@@ -35,5 +35,7 @@ public class ClientType {
     private Client client;
 
 
-
+    public ClientType(String description) {
+        this.description = description;
+    }
 }
