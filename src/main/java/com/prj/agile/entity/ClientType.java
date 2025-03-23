@@ -13,10 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity(name = "ClientType")
 @Table(name = "client_type",
-        schema= "onboarding",
-        uniqueConstraints = {
-                @UniqueConstraint(name="client_type_description_unique", columnNames = "description")
-        }
+        schema= "onboarding"
 )
 public class ClientType {
 

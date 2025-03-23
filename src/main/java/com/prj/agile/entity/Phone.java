@@ -10,10 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity(name = "Phone")
 @Table(name = "phone",
-        schema= "onboarding",
-        uniqueConstraints = {
-                @UniqueConstraint(name="phone_number_unique", columnNames = "number")
-        }
+        schema= "onboarding"
 )
 public class Phone {
     @Id

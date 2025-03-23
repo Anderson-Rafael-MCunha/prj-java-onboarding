@@ -117,6 +117,7 @@ public class ClientService {
 
 
     //DELETE
+    @Transactional
     public boolean deleteClient(Integer id) {
         Optional<Client> clientOpt = clientRepository.findById(id);
         if (clientOpt.isPresent()) {
