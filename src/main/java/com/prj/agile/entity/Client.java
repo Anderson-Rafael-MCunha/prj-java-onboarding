@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,7 @@ public class Client {
     @Column(name = "status", nullable = false, columnDefinition = "VARCHAR")
     private String status;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_type_id")
     private ClientType clientType;
 
@@ -62,7 +63,7 @@ public class Client {
     @JoinColumn(name = "client_address_id")
     private Address clientAddress;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Phone> phones = new ArrayList<>();
 
 
