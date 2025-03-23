@@ -1,7 +1,5 @@
-package com.prj.agile.dto;
+package com.prj.agile.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prj.agile.entity.Client;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientTypeDTO {
+public class ClientTypeRequestDTO {
 
-    @JsonIgnore
-    private Integer id;
     private String description;
 
 }

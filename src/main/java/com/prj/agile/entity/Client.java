@@ -54,15 +54,15 @@ public class Client {
     @Column(name = "status", nullable = false, columnDefinition = "VARCHAR")
     private String status;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_type_id")
     private ClientType clientType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_address_id")
     private Address clientAddress;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Phone> phones = new ArrayList<>();
 
 

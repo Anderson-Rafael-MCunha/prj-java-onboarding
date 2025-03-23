@@ -1,6 +1,7 @@
 package com.prj.agile.mapper;
 
-import com.prj.agile.dto.AddressDTO;
+import com.prj.agile.dto.request.AddressRequestDTO;
+import com.prj.agile.dto.response.AddressDTO;
 import com.prj.agile.entity.Address;
 
 public class AddressMapper {
@@ -19,7 +20,7 @@ public class AddressMapper {
         return dto;
     }
 
-    public static Address toEntity(AddressDTO dto) {
+    public static Address toEntity(AddressRequestDTO dto) {
         return new Address(
                 dto.getZipCode(),
                 dto.getComplement(),

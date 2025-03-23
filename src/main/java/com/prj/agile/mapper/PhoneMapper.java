@@ -1,6 +1,7 @@
 package com.prj.agile.mapper;
 
-import com.prj.agile.dto.PhoneDTO;
+import com.prj.agile.dto.request.PhoneRequestDTO;
+import com.prj.agile.dto.response.PhoneDTO;
 import com.prj.agile.entity.Phone;
 
 public class PhoneMapper {
@@ -16,7 +17,7 @@ public class PhoneMapper {
         return dto;
     }
 
-    public static Phone toEntity(PhoneDTO dto) {
+    public static Phone toEntity(PhoneRequestDTO dto) {
         return new Phone(null, dto.getPhoneStatus(), dto.getPhoneType(), dto.getNumber(), dto.getDdd(), dto.getArea());
     }
 }

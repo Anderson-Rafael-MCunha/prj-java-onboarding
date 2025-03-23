@@ -1,8 +1,7 @@
 package com.prj.agile.controller;
 
-import com.prj.agile.dto.ClientDTO;
-import com.prj.agile.entity.Client;
-import com.prj.agile.mapper.ClientMapper;
+import com.prj.agile.dto.request.ClientRequestDTO;
+import com.prj.agile.dto.response.ClientDTO;
 import com.prj.agile.service.ClientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +22,8 @@ public class ClientController {
 
     @Operation(summary = "Cria um novo cliente", description = "Esse endpoint cria um novo cliente e retorna os dados do cliente criado.")
     @PostMapping
-    public ResponseEntity<ClientDTO> createClient(@RequestBody ClientDTO clientDTO) {
-        // Converter o DTO para a entidade Client
-        Client client = ClientMapper.toEntity(clientDTO);
-
-        // Salvar o cliente (id será gerado automaticamente)
-        Client savedClient = clientService.createClient(client);
-
-        // Converter a entidade de volta para o DTO
-        ClientDTO savedClientDTO = clientMapper.toDto(savedClient);
-
-        return new ResponseEntity<>(savedClientDTO, HttpStatus.CREATED);
-        return ResponseEntity.ok(clientService.createClient(clientDTO));
+    public ResponseEntity<ClientDTO> createClient(@RequestBody ClientRequestDTO clientRequestDTO) {
+        return ResponseEntity.ok(clientService.createClient(clientRequestDTO));
     }
 
     @Operation(summary = "Lista todos os clientes", description = "Esse endpoint retorna todos os clientes cadastrados.")
@@ -60,8 +49,8 @@ public class ClientController {
 
     @Operation(summary = "Atualiza dados de cliente a partir de um ID", description = "Esse endpoint busca e atualiza os dados de cliente baseado no id e contrato de entrada.")
     @PutMapping("/{id}")
-    public ResponseEntity<ClientDTO> updateClient(@PathVariable Integer id, @RequestBody ClientDTO clientDTO) {
-        Optional<ClientDTO> updatedClient = clientService.updateClient(id, clientDTO);
+    public ResponseEntity<ClientDTO> updateClient(@PathVariable Integer id, @RequestBody ClientRequestDTO clientRequestDTO) {
+        Optional<ClientDTO> updatedClient = clientService.updateClient(id, clientRequestDTO);
         return updatedClient.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

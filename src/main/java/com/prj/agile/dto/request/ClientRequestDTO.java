@@ -1,7 +1,8 @@
-package com.prj.agile.dto;
+package com.prj.agile.dto.request;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.prj.agile.dto.response.AddressDTO;
+import com.prj.agile.dto.response.ClientTypeDTO;
+import com.prj.agile.dto.response.PhoneDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
+public class ClientRequestDTO {
 
-    @JsonIgnore
-    private Integer id;
     private String document;
     private String name;
     private Date birthDate;
@@ -25,10 +24,7 @@ public class ClientDTO {
     private Boolean pep;
     private String email;
     private String status;
-    private ClientTypeDTO clientType;
-    private AddressDTO clientAddress;
-    private List<PhoneDTO> phones;
-
+    private ClientTypeRequestDTO clientType;
+    private AddressRequestDTO clientAddress;
+    private List<PhoneRequestDTO> phones;
 }
-
-

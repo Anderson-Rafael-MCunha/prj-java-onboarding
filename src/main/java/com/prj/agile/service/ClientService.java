@@ -1,12 +1,14 @@
 package com.prj.agile.service;
 
-import com.prj.agile.dto.ClientDTO;
+import com.prj.agile.dto.request.ClientRequestDTO;
+import com.prj.agile.dto.response.ClientDTO;
 import com.prj.agile.entity.Client;
 import com.prj.agile.entity.ClientType;
 import com.prj.agile.entity.Address;
 import com.prj.agile.entity.Phone;
 import com.prj.agile.mapper.AddressMapper;
 import com.prj.agile.mapper.ClientMapper;
+import com.prj.agile.mapper.ClientTypeMapper;
 import com.prj.agile.mapper.PhoneMapper;
 import com.prj.agile.repository.ClientRepository;
 import com.prj.agile.repository.ClientTypeRepository;
@@ -36,15 +38,15 @@ public class ClientService {
 
     //POST
     @Transactional
-    public ClientDTO createClient(ClientDTO dto) {
-        ClientType clientType = clientTypeRepository.findById(dto.getClientType().getId()).orElse(null);
-        Address address = AddressMapper.toEntity(dto.getClientAddress());
-        address = addressRepository.save(address);
+    public ClientDTO createClient(ClientRequestDTO dto) {
+
+        ClientType clientType = clientTypeRepository.save(ClientTypeMapper.toEntity(dto.getClientType()));
+
+        Address address = addressRepository.save(AddressMapper.toEntity(dto.getClientAddress()));
 
         List<Phone> phones = dto.getPhones().stream().map(PhoneMapper::toEntity).collect(Collectors.toList());
 
-        Client client = ClientMapper.toEntity(dto, clientType, address, phones);
-        client = clientRepository.save(client);
+        Client client = clientRepository.save(ClientMapper.toEntity(dto, clientType, address, phones));
 
         for (Phone phone : phones) {
             phone.setClient(client);
@@ -72,7 +74,7 @@ public class ClientService {
 
     //PUT
     @Transactional
-    public Optional<ClientDTO> updateClient(Integer id, ClientDTO dto) {
+    public Optional<ClientDTO> updateClient(Integer id, ClientRequestDTO dto) {
         Optional<Client> clientOptional = clientRepository.findById(id);
         if (clientOptional.isEmpty()) {
             return Optional.empty();
@@ -88,7 +90,7 @@ public class ClientService {
 
         // Atualizar ClientType
         if (dto.getClientType() != null) {
-            ClientType clientType = clientTypeRepository.findById(dto.getClientType().getId()).orElse(null);
+            ClientType clientType = ClientTypeMapper.toEntity(dto.getClientType());
             existingClient.setClientType(clientType);
         }
 
@@ -117,8 +119,18 @@ public class ClientService {
     //DELETE
     @Transactional
     public boolean deleteClient(Integer id) {
-        if (clientRepository.existsById(id)) {
-            clientRepository.deleteById(id);
+        Optional<Client> clientOpt = clientRepository.findById(id);
+
+        if (clientOpt.isPresent()) {
+            Client client = clientOpt.get();
+
+            // Desassociando possíveis referências transientes antes da exclusão
+            client.setClientType(null);
+            client.setClientAddress(null);
+            client.getPhones().clear();
+            clientRepository.save(client);
+
+            clientRepository.delete(client);
             return true;
         }
         return false;

@@ -1,6 +1,7 @@
 package com.prj.agile.mapper;
 
-import com.prj.agile.dto.ClientTypeDTO;
+import com.prj.agile.dto.request.ClientTypeRequestDTO;
+import com.prj.agile.dto.response.ClientTypeDTO;
 import com.prj.agile.entity.ClientType;
 
 public class ClientTypeMapper {
@@ -12,7 +13,7 @@ public class ClientTypeMapper {
         return dto;
     }
 
-    public static ClientType toEntity(ClientTypeDTO dto) {
+    public static ClientType toEntity(ClientTypeRequestDTO dto) {
         return new ClientType(dto.getDescription());
     }
 }

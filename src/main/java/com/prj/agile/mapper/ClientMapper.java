@@ -1,6 +1,7 @@
 package com.prj.agile.mapper;
 
-import com.prj.agile.dto.ClientDTO;
+import com.prj.agile.dto.request.ClientRequestDTO;
+import com.prj.agile.dto.response.ClientDTO;
 import com.prj.agile.entity.Client;
 import com.prj.agile.entity.ClientType;
 import com.prj.agile.entity.Address;
@@ -27,7 +28,7 @@ public class ClientMapper {
         return dto;
     }
 
-    public static Client toEntity(ClientDTO dto, ClientType clientType, Address address, List<Phone> phones) {
+    public static Client toEntity(ClientRequestDTO dto, ClientType clientType, Address address, List<Phone> phones) {
         Client client = new Client(
                 dto.getDocument(),
                 dto.getName(),
